@@ -4,6 +4,7 @@ class Queue {
 	constructor(){}
 
 	static make(possiblePiecesArr, size) {
+		console.log('queue maker')
 		return _.map(Array.apply(null, {length: size}), (x) => _.sample(possiblePiecesArr));
 	}
 

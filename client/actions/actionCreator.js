@@ -1,6 +1,6 @@
-export function increment(index){
+export function makeQueue(){
+	console.log ('queue maker!')
 	return {
-		index,
-		type: 'SOMETHING_COOL'
+		type: 'MAKE_QUEUE'
 	}
 }
