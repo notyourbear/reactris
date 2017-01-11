@@ -9,6 +9,7 @@ export default function game(state = {}, action){
 		}
 		case 'SET_CURRENT_PIECE': {
 			state.currentPiece = new Tetramino(action.pieceType);
+			// i need to update the gameboard here.
 			return state;
 		}
 		default: return state;

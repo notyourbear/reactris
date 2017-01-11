@@ -15,7 +15,8 @@ const size = GAME_CONSTANTS.queueSize;
 const defaultState = {
 	queue: Queue.make(pieces, size),
 	game: {
-		gameboard: Game.make(GAME_CONSTANTS.height,GAME_CONSTANTS.width)
+		gameboard: Game.make(GAME_CONSTANTS.height,GAME_CONSTANTS.width),
+		currentPiece: {}
 	}
 }
 

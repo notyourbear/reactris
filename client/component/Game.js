@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import _ from 'underscore';
 
 import Queue from './Queue.js';
-import Row from './Row.js';
+import Board from './Board.js';
 
 import style from './Game.scss';
 
@@ -39,7 +39,7 @@ class Game extends Component {
 				</div>
 				<div className='gameboard'>
 					<button onClick={this.setCurrentPiece.bind(null, this.props)}> start game </button>
-					<span> { game.gameboard.map((r,i) => <Row key={i} row={r} border={true} />) }</span>
+					<Board game={ game } />
 				</div>
 			</div>
 		);
