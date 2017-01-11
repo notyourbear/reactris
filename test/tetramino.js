@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import _ from 'underscore';
 import tetraminos from '../client/constants/tetraminos.js';
 import Tetramino from '../client/logic/Tetramino.js';
+import GAME_CONSTANTS from '../client/constants/game.js';
+
 
 describe('Tetramino', () => {
 	describe('init', () => {
@@ -9,7 +11,7 @@ describe('Tetramino', () => {
 			const type = _.sample(['I', 'O', 'T', 'J', 'L', 'S', 'Z']);
 			const T = new Tetramino(type);
 			expect(T.matrix).to.deep.equal(tetraminos[T.type]);
-			expect(T.location).to.deep.equal([0,6]);
+			expect(T.location).to.deep.equal(GAME_CONSTANTS.pieceStart);
 		});
 	});
 

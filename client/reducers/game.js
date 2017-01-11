@@ -4,7 +4,7 @@ import Tetramino from '../logic/Tetramino.js'
 export default function game(state = {}, action){
 	switch (action.type) {
 		case 'INIT': {
-			state.gameboard = Game.make(22,12);
+			state.gameboard = Game.make();
 			return state;
 		}
 		case 'SET_CURRENT_PIECE': {

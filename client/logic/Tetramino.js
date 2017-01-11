@@ -1,9 +1,10 @@
 import _ from 'underscore';
 
 import TETRAMINOS from '../constants/tetraminos';
+import GAME_CONSTANTS from '../constants/game';
 
 class Tetramino {
-	constructor(type, location = [0, 5]){
+	constructor(type, location = GAME_CONSTANTS.pieceStart){
 		this.matrix = TETRAMINOS[type];
 		this.type = type;
 		this.location = location;

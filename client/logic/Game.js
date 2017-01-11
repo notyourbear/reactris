@@ -17,7 +17,6 @@ class Game {
 	}
 
 	static paintOnBoard(board, tetramino, cleanup) {
-		console.log('cleanup', cleanup)
 		let [rowOffset, colOffset] = tetramino.location;
 		let matrix = tetramino.matrix;
 
