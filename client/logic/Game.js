@@ -4,8 +4,8 @@ class Game {
 	constructor(){};
 
 	static make(height = GAME_CONSTANTS.height, width = GAME_CONSTANTS.width){
-		let board = [];
-		let row = [];
+		const board = [];
+		const row = [];
 		for(let i = width; i > 0; i--) {
 			row.push('');
 		}
@@ -16,7 +16,8 @@ class Game {
 		return board;
 	}
 
-	static paintOnBoard(board, tetramino) {
+	static paintOnBoard(board, tetramino, cleanup) {
+		console.log('cleanup', cleanup)
 		let [rowOffset, colOffset] = tetramino.location;
 		let matrix = tetramino.matrix;
 
@@ -29,7 +30,11 @@ class Game {
 						return board[i][y];
 					} else {
 						let r = i - rowOffset, c = y - colOffset;
-						return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : matrix[r][c];
+						if(cleanup === true){
+							return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : '';
+						} else {
+							return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : matrix[r][c];
+						}
 					}
 				});
 			}

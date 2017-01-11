@@ -20,6 +20,9 @@ class Game extends Component {
 	}
 
 	setCurrentPiece(props){
+		if(!_.isEmpty(props.game.currentPiece)){
+			props.paintOnBoard(props.game.currentPiece, true);
+		}
 		const piece = _.first(props.queue);
 		const queue = _.rest(props.queue);
 		props.setCurrentPiece(piece);

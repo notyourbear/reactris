@@ -13,7 +13,7 @@ export default function game(state = {}, action){
 			return state;
 		}
 		case 'PAINT_ON_BOARD': {
-			state.gameboard = Game.paintOnBoard(state.gameboard, action.piece);
+			state.gameboard = Game.paintOnBoard(state.gameboard, action.piece, action.cleanup);
 			return state;
 		}
 		default: return state;

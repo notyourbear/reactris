@@ -23,9 +23,10 @@ export function setCurrentPiece(pieceType){
 	}
 }
 
-export function paintOnBoard(piece){
+export function paintOnBoard(piece, cleanup){
 	return {
 		piece,
+		cleanup,
 		type: 'PAINT_ON_BOARD'
 	}
 }
