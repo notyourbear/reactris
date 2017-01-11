@@ -7,7 +7,8 @@
 		"start": "node server.js",
 		"clean": "rimraf dist",
 		"build:webpack": "NODE_ENV=production webpack --config webpack.config.prod.js",
-		"build": "npm run clean && npm run build:webpack"
+		"build": "npm run clean && npm run build:webpack",
+		"test": "./node_modules/.bin/mocha --compilers js:babel-core/register test/**.js"
 	},
 	"dependencies": {
 		"babel-core": "^6.7.7",
@@ -45,9 +46,10 @@
 		"webpack-hot-middleware": "^2.10.0"
 	},
 	"devDependencies": {
+		"chai": "^3.5.0",
 		"expect": "^1.18.0",
 		"expect-jsx": "^2.5.1",
-		"mocha": "^2.4.5",
+		"mocha": "^3.2.0",
 		"react-addons-test-utils": "^15.0.2"
 	}
 }
