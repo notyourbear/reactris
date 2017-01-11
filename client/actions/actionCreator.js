@@ -4,6 +4,12 @@ export function makeQueue(){
 	}
 }
 
+export function addToQueue(){
+	return {
+		type: 'ADD_TO_QUEUE'
+	}
+}
+
 export function initGame(){
 	return {
 		type: 'INIT'

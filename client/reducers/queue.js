@@ -1,12 +1,14 @@
-import Queue from '../logic/Queue.js'
+import _ from 'underscore';
+
+import Queue from '../logic/Queue.js';
+import GAME_CONSTANTS from '../constants/game.js';
 
 export default function queue(state = [], action){
 	switch (action.type) {
 		case 'MAKE_QUEUE':
-			const pieces = ['I', 'O', 'T', 'J', 'L', 'S', 'Z'];
-			const size = 6;
-			return Queue.make(pieces, size);
-
+			return Queue.make(GAME_CONSTANTS.pieces, GAME_CONSTANTS.queueSize);
+		case 'ADD_TO_QUEUE':
+			return Queue.addTo(state, _.sample(GAME_CONSTANTS.pieces));
 		default: return state;
 	}
 }

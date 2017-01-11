@@ -7,8 +7,8 @@ class Queue {
 		return _.map(Array.apply(null, {length: size}), (x) => _.sample(possiblePiecesArr));
 	}
 
-	static addTo(queueArr, arrToAdd) {
-		return queueArr.concat(arrToAdd);
+	static addTo(queue, piece) {
+		return [...queue, piece]
 	}
 
 	static purge(queueArr) {
