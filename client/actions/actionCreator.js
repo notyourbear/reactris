@@ -23,6 +23,13 @@ export function setCurrentPiece(pieceType){
 	}
 }
 
+export function paintOnBoard(piece){
+	return {
+		piece,
+		type: 'PAINT_ON_BOARD'
+	}
+}
+
 export function updateQueue(queue){
 	return {
 		queue,

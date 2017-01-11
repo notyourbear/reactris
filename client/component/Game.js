@@ -24,6 +24,7 @@ class Game extends Component {
 		const queue = _.rest(props.queue);
 		props.setCurrentPiece(piece);
 		props.updateQueue(queue);
+		props.paintOnBoard(props.game.currentPiece);
 	}
 
 	render(){

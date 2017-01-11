@@ -12,6 +12,10 @@ export default function game(state = {}, action){
 			// i need to update the gameboard here.
 			return state;
 		}
+		case 'PAINT_ON_BOARD': {
+			state.gameboard = Game.paintOnBoard(state.gameboard, action.piece);
+			return state;
+		}
 		default: return state;
 	}
 }

@@ -3,7 +3,7 @@ import _ from 'underscore';
 import TETRAMINOS from '../constants/tetraminos';
 
 class Tetramino {
-	constructor(type, location = [0, 6]){
+	constructor(type, location = [0, 5]){
 		this.matrix = TETRAMINOS[type];
 		this.type = type;
 		this.location = location;
