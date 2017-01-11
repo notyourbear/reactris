@@ -1,6 +1,11 @@
 export function makeQueue(){
-	console.log ('queue maker!')
 	return {
 		type: 'MAKE_QUEUE'
+	}
+}
+
+export function initGame(){
+	return {
+		type: 'INIT'
 	}
 }

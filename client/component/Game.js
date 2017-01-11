@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
+import Queue from './Queue.js';
+import Row from './Row.js';
+
+import style from './Game.scss';
 
 class Game extends Component {
 	constructor(props){
 		super(props);
 	}
 
+	makeQueue(props){
+		props.makeQueue(['I', 'O', 'T', 'J', 'L', 'S', 'Z'], 10)
+	}
+
 	render(){
-		const { game } = this.props;
-		const currentPiece = game.currentPiece;
-		return (<p>but then a game</p>)
+		const { game, queue } = this.props;
+		return (
+			<div>
+				<div className='queue'>
+					<button onClick={this.makeQueue.bind(null, this.props)} > make queue </button>
+					<div>
+						<Queue pieces={this.props.queue} />
+					</div>
+				</div>
+				<div className='gameboard'>
+					<span> { game.gameboard.map((r,i) => <Row key={i} row={r} border={true} />) }</span>
+				</div>
+			</div>
+		);
 	}
 }
 

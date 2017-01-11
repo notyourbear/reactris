@@ -1,10 +1,10 @@
 import _ from 'underscore';
 
-import tetraminos from '../constants/tetraminos';
+import TETRAMINOS from '../constants/tetraminos';
 
 class Tetramino {
 	constructor(type, location = [0, 6]){
-		this.matrix = tetraminos[type];
+		this.matrix = TETRAMINOS[type];
 		this.type = type;
 		this.location = location;
 	}

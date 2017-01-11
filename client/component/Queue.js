@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 
-import tetraminos from '../constants/tetraminos';
+import TETRAMINOS from '../constants/tetraminos';
 import Row from './Row.js';
 
 import style from './Queue.scss';
 
 const QueueItem = (piece) => {
-	const tetra = tetraminos[piece]
+	const tetra = TETRAMINOS[piece]
 
 	return (
 		<div>
