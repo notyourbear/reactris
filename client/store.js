@@ -9,8 +9,8 @@ import GAME_CONSTANTS from './constants/game';
 import Queue from './logic/Queue.js';
 import Game from './logic/Game.js';
 
-const pieces = ['I', 'O', 'T', 'J', 'L', 'S', 'Z'];
-const size = 6;
+const pieces = GAME_CONSTANTS.pieces;
+const size = GAME_CONSTANTS.queueSize;
 
 const defaultState = {
 	queue: Queue.make(pieces, size),
