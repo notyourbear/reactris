@@ -9,6 +9,11 @@ export default function queue(state = [], action){
 			return Queue.make(GAME_CONSTANTS.pieces, GAME_CONSTANTS.queueSize);
 		case 'ADD_TO_QUEUE':
 			return Queue.addTo(state, _.sample(GAME_CONSTANTS.pieces));
+		case 'UPDATE_QUEUE':
+			return [
+				...action.queue,
+				_.sample(GAME_CONSTANTS.pieces)
+			]
 		default: return state;
 	}
 }

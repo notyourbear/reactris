@@ -4,7 +4,6 @@ import Block  from './Block.js';
 import style from './Row.scss';
 
 const Row = ((props) => {
-	console.log(props)
 	let classNames = props.border === true ? 'row bordered' : 'row';
 	return (
 		<div className={classNames}>

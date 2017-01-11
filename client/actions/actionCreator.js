@@ -15,3 +15,17 @@ export function initGame(){
 		type: 'INIT'
 	}
 }
+
+export function setCurrentPiece(pieceType){
+	return {
+		pieceType,
+		type: 'SET_CURRENT_PIECE'
+	}
+}
+
+export function updateQueue(queue){
+	return {
+		queue,
+		type: 'UPDATE_QUEUE'
+	}
+}

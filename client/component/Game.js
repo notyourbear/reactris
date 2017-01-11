@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import _ from 'underscore';
+
 import Queue from './Queue.js';
 import Row from './Row.js';
 
@@ -17,6 +19,13 @@ class Game extends Component {
 		props.addToQueue()
 	}
 
+	setCurrentPiece(props){
+		const piece = _.first(props.queue);
+		const queue = _.rest(props.queue);
+		props.setCurrentPiece(piece);
+		props.updateQueue(queue);
+	}
+
 	render(){
 		const { game, queue } = this.props;
 		return (
@@ -29,6 +38,7 @@ class Game extends Component {
 					<button onClick={this.addToQueue.bind(null, this.props)} > add to queue </button>
 				</div>
 				<div className='gameboard'>
+					<button onClick={this.setCurrentPiece.bind(null, this.props)}> start game </button>
 					<span> { game.gameboard.map((r,i) => <Row key={i} row={r} border={true} />) }</span>
 				</div>
 			</div>
