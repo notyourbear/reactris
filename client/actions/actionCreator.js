@@ -1,3 +1,5 @@
+import KEYSTROKES from '../constants/keys.js'
+
 export function makeQueue(){
 	return {
 		type: 'MAKE_QUEUE'
@@ -33,8 +35,12 @@ export function updateQueue(queue){
 }
 
 export function handleKeystroke(keystroke){
-	return {
-		keystroke,
-		type: 'FIRED_KEYSTROKE'
+	switch(keystroke){
+		case KEYSTROKES['LEFT_ARROW']:
+			return { keystroke:'left', type: 'FIRED_KEYSTROKE'}
+		case KEYSTROKES['RIGHT_ARROW']:
+			return { keystroke:'right', type: 'FIRED_KEYSTROKE'}
+		case KEYSTROKES['DOWN_ARROW']:
+			return { keystroke:'down', type: 'FIRED_KEYSTROKE'}
 	}
 }

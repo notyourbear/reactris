@@ -18,26 +18,15 @@ export default function game(state = {}, action){
 			}
 		}
 		case 'FIRED_KEYSTROKE': {
-			switch (action.keystroke){
-				case KEYSTROKES['LEFT_ARROW']: {
-					state.currentPiece.move('left')
-					return {
-						...state
-					}
+			const loc = Tetramino.move(action.keystroke, state.currentPiece)
+			const tetramino = new Tetramino(state.currentPiece.type, loc)
+			tetramino.matrix = state.currentPiece.matrix
+
+			if(Tetramino.mayMove(action.keystroke, state.gameboard, state.currentPiece)){
+				return {
+					...state,
+					'currentPiece':tetramino
 				}
-				case KEYSTROKES['RIGHT_ARROW']: {
-					state.currentPiece.move('right')
-					return {
-						...state
-					}
-				}
-				case KEYSTROKES['DOWN_ARROW']:{
-					state.currentPiece.move();
-					return {
-						...state
-					}
-				}
-				default: return state;
 			}
 			return state;
 		}

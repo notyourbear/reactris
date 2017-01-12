@@ -10,30 +10,44 @@ class Tetramino {
 		this.location = location;
 	}
 
-	rotate(){
-		this.matrix = _.zip.apply(null, this.matrix).map(row => row.reverse());
+	static rotatePiece(tetramino){
+		return _.zip.apply(null, tetramino.matrix).map(row => row.reverse());
 	}
 
-	move(where, gameboard){
-		const _this = this;
-		let [row, col] = this.location;
-		let pos = 0;
-		//add if logic
+	static mayMove(direction, board, tetramino){
+		console.log(tetramino)
+		const [row, col] = tetramino.location
+		console.log(row,col)
+		switch(direction){
+			case 'left': {
+				return col <= 0 ? false : true
+			}
+			case 'right': {
+				return col + tetramino.matrix[0].length >= board[0].length ? false : true
+			}
+			case 'down': {
+				return row + tetramino.matrix.length >= board.length ? false : true
+			}
+			default: return true;
+		}
+	}
+
+	static move(where, tetramino){
+		let [row, col] = tetramino.location;
+		let pos;
+
 		switch(where){
 			case 'right': {
 				pos =  col + 1;
-				_this.location = [row, pos]
-				break;
+				return [row, pos]
 			}
 			case 'left': {
 				pos = col - 1;
-				_this.location = [row, pos]
-				break;
+				return [row, pos]
 			}
 			default:
 				pos = row + 1;
-				_this.location = [pos, col];
-				break;
+				return [pos, col];
 		}
 	}
 };
