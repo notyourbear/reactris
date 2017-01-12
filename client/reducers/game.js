@@ -32,6 +32,12 @@ export default function game(state = {}, action){
 						...state
 					}
 				}
+				case KEYSTROKES['DOWN_ARROW']:{
+					state.currentPiece.move();
+					return {
+						...state
+					}
+				}
 				default: return state;
 			}
 			return state;
