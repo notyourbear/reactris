@@ -25,24 +25,21 @@ class Game extends Component {
 	}
 
 	setCurrentPiece(props){
-		if(!_.isEmpty(props.game.currentPiece)){
-			props.paintOnBoard(props.game.currentPiece, true);
-		}
-		const piece = _.first(props.queue);
-		const queue = _.rest(props.queue);
-		props.setCurrentPiece(piece);
-		props.updateQueue(queue);
+		props.setCurrentPiece(_.first(props.queue));
+		props.updateQueue(_.rest(props.queue));
 	}
 
 	componentDidUpdate(prevProps, prevState){
 		if (!_.isEqual(this.props.game, prevProps.game)){
+			if(!_.isEmpty(prevProps.game.currentPiece)){
+				this.props.paintOnBoard(prevProps.game.currentPiece, true);
+			}
 			this.props.paintOnBoard(this.props.game.currentPiece);
 		}
 	}
 
 	render(){
 		const { game, queue } = this.props;
-		console.log(game)
 		return (
 			<div onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
 				<div className='queue'>

@@ -19,10 +19,8 @@ class Game {
 	static paintOnBoard(board, tetramino, cleanup) {
 		let [rowOffset, colOffset] = tetramino.location;
 		let matrix = tetramino.matrix;
-
 		return Game.make().map((row, i) => {
-			if(i < rowOffset || i > matrix.length - rowOffset + 1){
-				console.log('board', tetramino.location[0], rowOffset)
+			if(i < rowOffset || i > (rowOffset + matrix.length)){
 				return board[i];
 			} else {
 				return row.map((col, y) => {

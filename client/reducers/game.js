@@ -18,7 +18,6 @@ export default function game(state = {}, action){
 			}
 		}
 		case 'FIRED_KEYSTROKE': {
-			console.log(action, state.currentPiece)
 			switch (action.keystroke){
 				case KEYSTROKES['LEFT_ARROW']: {
 					state.currentPiece.move('left')
