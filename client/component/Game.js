@@ -42,6 +42,7 @@ class Game extends Component {
 
 	render(){
 		const { game, queue } = this.props;
+		console.log(game)
 		return (
 			<div onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
 				<div className='queue'>

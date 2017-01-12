@@ -22,18 +22,15 @@ class Game {
 
 		return Game.make().map((row, i) => {
 			if(i < rowOffset || i > matrix.length - rowOffset + 1){
+				console.log('board', tetramino.location[0], rowOffset)
 				return board[i];
 			} else {
 				return row.map((col, y) => {
-					if(y < colOffset || y > board[i].length - colOffset + 1){
-						return board[i][y];
+					let r = i - rowOffset, c = y - colOffset;
+					if(cleanup === true){
+						return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : '';
 					} else {
-						let r = i - rowOffset, c = y - colOffset;
-						if(cleanup === true){
-							return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : '';
-						} else {
-							return (r >= matrix.length || matrix[r][c] === '') ? board[i][y] : matrix[r][c];
-						}
+						return (c < 0 || r >= matrix.length || matrix[r][c] === '') ? board[i][y] : matrix[r][c];
 					}
 				});
 			}
