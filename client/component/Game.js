@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'underscore';
 
+import KEYSTROKES from '../constants/keys.js';
+
 import Queue from './Queue.js';
 import Board from './Board.js';
 
@@ -11,12 +13,16 @@ class Game extends Component {
 		super(props);
 	}
 
-	makeQueue(props){
-		props.makeQueue(['I', 'O', 'T', 'J', 'L', 'S', 'Z'], 10)
-	}
-
-	addToQueue(props){
-		props.addToQueue()
+	handleKeystroke(props, event){
+		event.preventDefault();
+		const acceptedKeystroke = _.values(KEYSTROKES).indexOf(event.keyCode)
+		if(acceptedKeystroke !== -1) {
+			if(!_.isEmpty(props.game.currentPiece)){
+				console.log('gogogo', props.game.currentPiece)
+				props.paintOnBoard(props.game.currentPiece, true);
+			}
+			props.handleKeystroke(event.keyCode);
+		}
 	}
 
 	setCurrentPiece(props){
@@ -27,22 +33,25 @@ class Game extends Component {
 		const queue = _.rest(props.queue);
 		props.setCurrentPiece(piece);
 		props.updateQueue(queue);
-		props.paintOnBoard(props.game.currentPiece);
+	}
+
+	componentDidUpdate(prevProps, prevState){
+		if (!_.isEqual(this.props.game, prevProps.game)){
+			this.props.paintOnBoard(this.props.game.currentPiece);
+		}
 	}
 
 	render(){
 		const { game, queue } = this.props;
 		return (
-			<div>
+			<div onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
 				<div className='queue'>
-					<button onClick={this.makeQueue.bind(null, this.props)} > make queue </button>
 					<div>
 						<Queue pieces={this.props.queue} />
 					</div>
-					<button onClick={this.addToQueue.bind(null, this.props)} > add to queue </button>
 				</div>
 				<div className='gameboard'>
-					<button onClick={this.setCurrentPiece.bind(null, this.props)}> start game </button>
+					<button onClick={this.setCurrentPiece.bind(null, this.props)}> next piece </button>
 					<Board game={ game } />
 				</div>
 			</div>

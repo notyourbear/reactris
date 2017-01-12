@@ -3,17 +3,20 @@ import Tetramino from '../logic/Tetramino.js'
 
 export default function game(state = {}, action){
 	switch (action.type) {
-		case 'INIT': {
-			state.gameboard = Game.make();
-			return state;
-		}
 		case 'SET_CURRENT_PIECE': {
-			state.currentPiece = new Tetramino(action.pieceType);
-			// i need to update the gameboard here.
-			return state;
+			return {
+				...state,
+				'currentPiece': new Tetramino(action.pieceType)
+			}
 		}
 		case 'PAINT_ON_BOARD': {
-			state.gameboard = Game.paintOnBoard(state.gameboard, action.piece, action.cleanup);
+			return {
+				...state,
+				'gameboard': Game.paintOnBoard(state.gameboard, action.piece, action.cleanup)
+			}
+		}
+		case 'FIRED_KEYSTROKE': {
+			console.log(action)
 			return state;
 		}
 		default: return state;

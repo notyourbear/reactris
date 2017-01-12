@@ -10,12 +10,6 @@ export function addToQueue(){
 	}
 }
 
-export function initGame(){
-	return {
-		type: 'INIT'
-	}
-}
-
 export function setCurrentPiece(pieceType){
 	return {
 		pieceType,
@@ -35,5 +29,12 @@ export function updateQueue(queue){
 	return {
 		queue,
 		type: 'UPDATE_QUEUE'
+	}
+}
+
+export function handleKeystroke(keystroke){
+	return {
+		keystroke,
+		type: 'FIRED_KEYSTROKE'
 	}
 }
