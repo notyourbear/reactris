@@ -18,7 +18,6 @@ class Game extends Component {
 		const acceptedKeystroke = _.values(KEYSTROKES).indexOf(event.keyCode)
 		if(acceptedKeystroke !== -1) {
 			if(!_.isEmpty(props.game.currentPiece)){
-				console.log('gogogo', props.game.currentPiece)
 				props.paintOnBoard(props.game.currentPiece, true);
 			}
 			props.handleKeystroke(event.keyCode);

@@ -23,6 +23,7 @@ class Tetramino {
 			case 'right': {
 				pos =  col + 1;
 				_this.location = [row, pos]
+				console.log((_this.location))
 				break;
 			}
 			case 'left': {

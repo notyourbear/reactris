@@ -1,6 +1,8 @@
 import Game from '../logic/Game.js'
 import Tetramino from '../logic/Tetramino.js'
 
+import KEYSTROKES from '../constants/keys.js'
+
 export default function game(state = {}, action){
 	switch (action.type) {
 		case 'SET_CURRENT_PIECE': {
@@ -16,7 +18,22 @@ export default function game(state = {}, action){
 			}
 		}
 		case 'FIRED_KEYSTROKE': {
-			console.log(action)
+			console.log(action, state.currentPiece)
+			switch (action.keystroke){
+				case KEYSTROKES['LEFT_ARROW']: {
+					state.currentPiece.move('left')
+					return {
+						...state
+					}
+				}
+				case KEYSTROKES['RIGHT_ARROW']: {
+					state.currentPiece.move('right')
+					return {
+						...state
+					}
+				}
+				default: return state;
+			}
 			return state;
 		}
 		default: return state;
