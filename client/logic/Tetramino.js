@@ -10,7 +10,7 @@ class Tetramino {
 		this.location = location;
 	}
 
-	static rotatePiece(tetramino){
+	static rotate(tetramino){
 		return _.zip.apply(null, tetramino.matrix).map(row => row.reverse());
 	}
 

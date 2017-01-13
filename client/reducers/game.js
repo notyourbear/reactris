@@ -20,7 +20,18 @@ export default function game(state = {}, action){
 				gameboard
 			}
 		}
-		case 'FIRED_KEYSTROKE': {
+		case 'ROTATE': {
+			const matrix = Tetramino.rotate(state.currentPiece);
+			const tetramino = new Tetramino(state.currentPiece.type, state.currentPiece.location)
+			tetramino.matrix = matrix
+
+			return {
+				...state,
+				'newPiece': false,
+				'currentPiece': tetramino
+			}
+		}
+		case 'MOVE': {
 			const loc = Tetramino.move(action.keystroke, state.currentPiece)
 			const tetramino = new Tetramino(state.currentPiece.type, loc)
 			tetramino.matrix = state.currentPiece.matrix

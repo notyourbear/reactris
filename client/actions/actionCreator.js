@@ -36,11 +36,9 @@ export function updateQueue(queue){
 
 export function handleKeystroke(keystroke){
 	switch(keystroke){
-		case KEYSTROKES['LEFT_ARROW']:
-			return { keystroke:'left', type: 'FIRED_KEYSTROKE'}
-		case KEYSTROKES['RIGHT_ARROW']:
-			return { keystroke:'right', type: 'FIRED_KEYSTROKE'}
-		case KEYSTROKES['DOWN_ARROW']:
-			return { keystroke:'down', type: 'FIRED_KEYSTROKE'}
+		case KEYSTROKES['LEFT_ARROW']: return { keystroke:'left', type: 'MOVE'}
+		case KEYSTROKES['RIGHT_ARROW']: return { keystroke:'right', type: 'MOVE'}
+		case KEYSTROKES['DOWN_ARROW']: return { keystroke:'down', type: 'MOVE'}
+		case KEYSTROKES['SPACE_BAR']: return { type: 'ROTATE'}
 	}
 }
