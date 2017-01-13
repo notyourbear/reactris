@@ -30,6 +30,9 @@ class Game extends Component {
 		if (!_.isEqual(this.props.game, prevProps.game)){
 			if(!_.isEmpty(prevProps.game.currentPiece)){
 				this.props.paintOnBoard(prevProps.game.currentPiece, true);
+				if(this.props.game.newPiece){
+					this.props.paintOnBoard(prevProps.game.currentPiece);
+				}
 			}
 			this.props.paintOnBoard(this.props.game.currentPiece);
 		}

@@ -15,9 +15,7 @@ class Tetramino {
 	}
 
 	static mayMove(direction, board, tetramino){
-		console.log(tetramino)
 		const [row, col] = tetramino.location
-		console.log(row,col)
 		switch(direction){
 			case 'left': {
 				return col <= 0 ? false : true

@@ -1,6 +1,7 @@
 import Game from '../logic/Game.js'
 import Tetramino from '../logic/Tetramino.js'
 
+import GAME_CONSTANTS from '../constants/game.js'
 import KEYSTROKES from '../constants/keys.js'
 
 export default function game(state = {}, action){
@@ -8,13 +9,15 @@ export default function game(state = {}, action){
 		case 'SET_CURRENT_PIECE': {
 			return {
 				...state,
+				'newPiece': true,
 				'currentPiece': new Tetramino(action.pieceType)
 			}
 		}
 		case 'PAINT_ON_BOARD': {
+			const gameboard = Game.paintOnBoard(state.gameboard, action.piece, action.cleanup)
 			return {
 				...state,
-				'gameboard': Game.paintOnBoard(state.gameboard, action.piece, action.cleanup)
+				gameboard
 			}
 		}
 		case 'FIRED_KEYSTROKE': {
@@ -25,6 +28,7 @@ export default function game(state = {}, action){
 			if(Tetramino.mayMove(action.keystroke, state.gameboard, state.currentPiece)){
 				return {
 					...state,
+					'newPiece': false,
 					'currentPiece':tetramino
 				}
 			}
