@@ -16,8 +16,7 @@ class Tetramino {
 
 	static mayMove(direction, board, tetramino){
 		const [row, col] = tetramino.location
-		const matrix = tetramino.matrix;
-
+		const matrix = tetramino.type !== 'I' ? tetramino.matrix : tetramino.matrix[0][1] === 'I' ? [['I', 'I', 'I', 'I']] : [['I'], ['I'], ['I'], ['I']];
 		switch(direction){
 			case 'left': {
 				if(col <= 0) return false
@@ -36,12 +35,12 @@ class Tetramino {
 				}, true)
 			}
 			case 'right': {
-				let rightside = col + tetramino.matrix[0].length
+				let rightside = col + matrix[0].length
 				if(rightside >= board[0].length) return false
 				return matrix.reduce((mayMove, val, index) => {
 					switch(true){
 						case (mayMove === false): return false;
-						case (val[tetramino.matrix[0].length - 1] === tetramino.type): {
+						case (val[matrix[0].length - 1] === tetramino.type): {
 							let rightOf = board[index + row][rightside]
 							return (rightOf === '' || rightOf === undefined) ? true : false
 						}
@@ -53,11 +52,9 @@ class Tetramino {
 				}, true)
 			}
 			case 'down': {
-				let bottom = row + tetramino.matrix.length
+				let bottom = row + matrix.length
 				if(bottom >= board.length) return false
-				console.log(matrix[matrix.length-1])
 				return matrix[matrix.length-1].reduce((mayMove, val, index) => {
-					console.log(val)
 					switch(true){
 						case (mayMove === false): return false;
 						case (val === tetramino.type): {
