@@ -53,7 +53,23 @@ class Tetramino {
 				}, true)
 			}
 			case 'down': {
-				return row + tetramino.matrix.length >= board.length ? false : true
+				let bottom = row + tetramino.matrix.length
+				if(bottom >= board.length) return false
+				console.log(matrix[matrix.length-1])
+				return matrix[matrix.length-1].reduce((mayMove, val, index) => {
+					console.log(val)
+					switch(true){
+						case (mayMove === false): return false;
+						case (val === tetramino.type): {
+							let beneath = board[bottom][index + col]
+							return (beneath === '' || beneath === undefined) ? true : false
+						}
+						default: {
+							let beneath = board[bottom - 1][index + col]
+							return (beneath === '' || beneath === undefined) ? true : false
+						}
+					}
+				}, true)
 			}
 			default: return true;
 		}
