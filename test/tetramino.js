@@ -15,38 +15,34 @@ describe('Tetramino', () => {
 		});
 	});
 
-	// describe('rotate', () => {
-	// 	it('should return a rotated version of an I tetramino', () => {
-	// 		const T = new Tetramino('I');
-	// 		const rotated = [['I','I','I','I'],['','','','']];
-	// 		T.rotate();
-	// 		expect(T.matrix).to.deep.equal(rotated);
-	// 	});
-	// });
+	describe('rotate', () => {
+		it('should return a rotated version of an I tetramino', () => {
+			const T = new Tetramino('I');
+			const rotated = [['I','I','I','I'],['','','','']];
+			expect(Tetramino.rotate(T)).to.deep.equal(rotated);
+		});
+	});
 
-	// describe('move', () => {
-	// 	it('should move a piece down one spot', () => {
-	// 		const T = new Tetramino('I');
-	// 		let [row, col] = T.location;
-	// 		let expected = [row + 1, col];
-	// 		T.move();
-	// 		expect(T.location).to.deep.equal(expected);
-	// 	});
-	//
-	// 	it('should move left a spot', () => {
-	// 		const T = new Tetramino('I');
-	// 		let [row, col] = T.location;
-	// 		let expected = [row, col - 1];
-	// 		T.move('left');
-	// 		expect(T.location).to.deep.equal(expected);
-	// 	});
-	//
-	// 	it('should move right a spot', () => {
-	// 		const T = new Tetramino('I');
-	// 		let [row, col] = T.location;
-	// 		let expected = [row, col + 1];
-	// 		T.move('right');
-	// 		expect(T.location).to.deep.equal(expected);
-	// 	});
-	// });
+	describe('move', () => {
+		it('should move a piece down one spot', () => {
+			const T = new Tetramino('I');
+			let [row, col] = T.location;
+			let expected = [row + 1, col];
+			expect(Tetramino.move('down', T)).to.deep.equal(expected);
+		});
+
+		it('should move left a spot', () => {
+			const T = new Tetramino('I');
+			let [row, col] = T.location;
+			let expected = [row, col - 1];
+			expect(Tetramino.move('left', T)).to.deep.equal(expected);
+		});
+
+		it('should move right a spot', () => {
+			const T = new Tetramino('I');
+			let [row, col] = T.location;
+			let expected = [row, col + 1];
+			expect(Tetramino.move('right', T)).to.deep.equal(expected);
+		});
+	});
 });
