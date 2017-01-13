@@ -16,9 +16,24 @@ class Tetramino {
 
 	static mayMove(direction, board, tetramino){
 		const [row, col] = tetramino.location
+		const matrix = tetramino.matrix;
+
 		switch(direction){
 			case 'left': {
-				return col <= 0 ? false : true
+				if(col <= 0) return false
+				return matrix.reduce((mayMove, val, index) => {
+					switch(true){
+						case (mayMove === false): return false;
+						case (val[0] === tetramino.type): {
+							let leftOf = board[index + row][col - 1]
+							return (leftOf === '' || leftOf === undefined) ? true : false
+						}
+						default: {
+							let leftOf = board[index + row][col]
+							return (leftOf === '' || leftOf === undefined) ? true : false
+						}
+					}
+				}, true)
 			}
 			case 'right': {
 				return col + tetramino.matrix[0].length >= board[0].length ? false : true
