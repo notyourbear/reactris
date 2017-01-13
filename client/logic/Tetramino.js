@@ -36,7 +36,21 @@ class Tetramino {
 				}, true)
 			}
 			case 'right': {
-				return col + tetramino.matrix[0].length >= board[0].length ? false : true
+				let rightside = col + tetramino.matrix[0].length
+				if(rightside >= board[0].length) return false
+				return matrix.reduce((mayMove, val, index) => {
+					switch(true){
+						case (mayMove === false): return false;
+						case (val[tetramino.matrix[0].length - 1] === tetramino.type): {
+							let rightOf = board[index + row][rightside]
+							return (rightOf === '' || rightOf === undefined) ? true : false
+						}
+						default: {
+							let rightOf = board[index + row][rightside - 1]
+							return (rightOf === '' || rightOf === undefined) ? true : false
+						}
+					}
+				}, true)
 			}
 			case 'down': {
 				return row + tetramino.matrix.length >= board.length ? false : true
