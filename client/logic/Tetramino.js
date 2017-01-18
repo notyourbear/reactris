@@ -15,49 +15,52 @@ class Tetramino {
 	}
 
 	static mayMove(direction, board, tetramino){
-		const [row, col] = tetramino.location
-		const matrix = tetramino.type !== 'I' ? tetramino.matrix : tetramino.matrix[0][1] === 'I' ? [['I', 'I', 'I', 'I']] : [['I'], ['I'], ['I'], ['I']];
+		const [row, col] = tetramino.location;
+		const type = tetramino.type;
+		const matrix = tetramino.matrix;
+		const locator = (direction, row, colIndex, type) => {
+			if(colIndex >= row.length || colIndex < 0) {
+				return -1;
+			} else if (direction === 'left') {
+				return row[colIndex] === type ? colIndex : locator(direction, row, colIndex + 1, type)
+			} else if (direction === 'right'){
+				return row[colIndex] === type ? colIndex : locator(direction, row, colIndex - 1, type)
+			}
+		}
+		const locatorDown = (matrix, rowIndex, colIndex, type) => {
+
+		}
+
 		switch(direction){
 			case 'left': {
 				if(col <= 0) return false
-				return matrix.reduce((mayMove, val, index) => {
-					switch(true){
-						case (mayMove === false): return false;
-						case (val[0] === tetramino.type): {
-							let leftOf = board[index + row][col - 1]
-							return (leftOf === '' || leftOf === undefined) ? true : false
-						}
-						default: {
-							let leftOf = board[index + row][col]
-							return (leftOf === '' || leftOf === undefined) ? true : false
-						}
-					}
+				return matrix.reduce((mayMove, currentRow, index) => {
+					if(mayMove === false) return false;
+					let colIndex = locator('left', currentRow, 0, type)
+					if(colIndex === -1) return true;
+					let leftOf = board[index + row][col + colIndex  - 1]
+					return (leftOf === '' || leftOf === undefined) ? true : false
 				}, true)
 			}
 			case 'right': {
 				let rightside = col + matrix[0].length
 				if(rightside >= board[0].length) return false
-				return matrix.reduce((mayMove, val, index) => {
-					switch(true){
-						case (mayMove === false): return false;
-						case (val[matrix[0].length - 1] === tetramino.type): {
-							let rightOf = board[index + row][rightside]
-							return (rightOf === '' || rightOf === undefined) ? true : false
-						}
-						default: {
-							let rightOf = board[index + row][rightside - 1]
-							return (rightOf === '' || rightOf === undefined) ? true : false
-						}
-					}
+				return matrix.reduce((mayMove, currentRow, index) => {
+					if(mayMove === false) return false;
+					let colIndex = locator('right', currentRow, matrix[index].length - 1, type)
+					let rightOf = board[index + row][rightside + colIndex - 1]
+					return (rightOf === '' || rightOf === undefined) ? true : false
 				}, true)
 			}
 			case 'down': {
 				let bottom = row + matrix.length
 				if(bottom >= board.length) return false
-				return matrix[matrix.length-1].reduce((mayMove, val, index) => {
+
+				return matrix[matrix.length-1].reduce((mayMove, currentRow, index) => {
+					if(mayMove === false) return false;
 					switch(true){
 						case (mayMove === false): return false;
-						case (val === tetramino.type): {
+						case (currentRow === tetramino.type): {
 							let beneath = board[bottom][index + col]
 							return (beneath === '' || beneath === undefined) ? true : false
 						}

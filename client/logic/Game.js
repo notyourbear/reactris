@@ -26,9 +26,9 @@ class Game {
 				return row.map((col, y) => {
 					let r = i - rowOffset, c = y - colOffset, x = colOffset - y + 1;
 					if(cleanup === true){
-						return (r >= matrix.length || c >= matrix[0].length || x >= matrix[0].length || matrix[r][c] === '') ? board[i][y] : '';
+						return (r >= matrix.length || c >= matrix[0].length || x >= matrix[0].length || matrix[r][c] === '' || matrix[r][c] === undefined) ? board[i][y] : '';
 					} else {
-						return (r >= matrix.length || c >= matrix[0].length || x >= matrix[0].length || matrix[r][c] === '') ? board[i][y] : matrix[r][c];
+						return (r >= matrix.length || c >= matrix[0].length || x >= matrix[0].length || matrix[r][c] === '' || matrix[r][c] === undefined) ? board[i][y] : matrix[r][c];
 					}
 				});
 			}
