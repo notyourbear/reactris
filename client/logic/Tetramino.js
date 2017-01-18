@@ -48,7 +48,8 @@ class Tetramino {
 				return matrix.reduce((mayMove, currentRow, index) => {
 					if(mayMove === false) return false;
 					let colIndex = locator('right', currentRow, matrix[index].length - 1, type)
-					let rightOf = board[index + row][rightside + colIndex - 1]
+					if(colIndex === -1) return true;
+					let rightOf = board[index + row][rightside - Math.abs(currentRow.length - 1 - colIndex)]
 					return (rightOf === '' || rightOf === undefined) ? true : false
 				}, true)
 			}
