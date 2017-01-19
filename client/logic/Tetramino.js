@@ -10,6 +10,28 @@ class Tetramino {
 		this.location = location;
 	}
 
+	static mayRotate(board, tetramino){
+		const rotated = Tetramino.rotate(tetramino);
+		const [row, col] = tetramino.location;
+
+		if(col < 0 || col + rotated[0].length > board[0].length) return false;
+		// const [row, col] = tetramino.location;
+		// tetramino.matrix.map((currentRow, currentRowIndex) => {
+		// 	return currentRow.map((block, colIndex) => {
+		// 		board[currentRowIndex + row][colIndex + col] = ''
+		// 		return block;
+		// 	});
+		// });
+		// return rotated.reduce((mayRotate, currentRow, rowIndex) => {
+		// 	if(mayRotate === false) return false;
+		// 	return currentRow.reduce((mayRotate, block, colIndex) => {
+		// 		if(mayRotate === false) return false;
+		// 		return board[rowIndex + row][colIndex + col] === undefined || board[rowIndex + row][colIndex + col] === '' ? true : false;
+		// 	}, true)
+		// },true)
+		return true;
+	}
+
 	static rotate(tetramino){
 		return _.zip.apply(null, tetramino.matrix).map(row => row.reverse());
 	}

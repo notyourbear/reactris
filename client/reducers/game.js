@@ -24,12 +24,17 @@ export default function game(state = {}, action){
 			const matrix = Tetramino.rotate(state.currentPiece);
 			const tetramino = new Tetramino(state.currentPiece.type, state.currentPiece.location)
 			tetramino.matrix = matrix
-
-			return {
-				...state,
-				'newPiece': false,
-				'currentPiece': tetramino
+			let can = Tetramino.mayRotate(state.gameboard, state.currentPiece)
+			console.log(can)
+			if(can){
+				return {
+					...state,
+					'newPiece': false,
+					'currentPiece': tetramino
+				}
 			}
+			return state;
+
 		}
 		case 'MOVE': {
 			const loc = Tetramino.move(action.keystroke, state.currentPiece)
