@@ -18,6 +18,7 @@ class Tetramino {
 		const [row, col] = tetramino.location;
 		const type = tetramino.type;
 		const matrix = tetramino.matrix;
+
 		const locator = (direction, row, colIndex, type) => {
 			if(colIndex >= row.length || colIndex < 0) {
 				return -1;
@@ -26,9 +27,6 @@ class Tetramino {
 			} else if (direction === 'right'){
 				return row[colIndex] === type ? colIndex : locator(direction, row, colIndex - 1, type)
 			}
-		}
-		const locatorDown = (matrix, rowIndex, colIndex, type) => {
-
 		}
 
 		switch(direction){
@@ -54,23 +52,27 @@ class Tetramino {
 				}, true)
 			}
 			case 'down': {
-				let bottom = row + matrix.length
-				if(bottom >= board.length) return false
+				const length = matrix[0].length;
+				const checks = []
+				const colIndexes = []
+				let currentRowIndex = matrix.length - 1
 
-				return matrix[matrix.length-1].reduce((mayMove, currentRow, index) => {
-					if(mayMove === false) return false;
-					switch(true){
-						case (mayMove === false): return false;
-						case (currentRow === tetramino.type): {
-							let beneath = board[bottom][index + col]
-							return (beneath === '' || beneath === undefined) ? true : false
-						}
-						default: {
-							let beneath = board[bottom - 1][index + col]
-							return (beneath === '' || beneath === undefined) ? true : false
+				while(checks.length < length && currentRowIndex >= 0){
+					let currentRow = matrix[currentRowIndex]
+					for(let i = 0; i < currentRow.length; i++){
+						if(currentRow[i] === type && colIndexes.indexOf(i) === -1){
+							colIndexes.push(i);
+							checks.push([currentRowIndex, i]);
 						}
 					}
-				}, true)
+					currentRowIndex--;
+				}
+				return checks.reduce((mayMove, check) => {
+					let bottom = row + check[0]
+					if(mayMove === false || bottom === board.length - 1) return false;
+					let beneath = board[bottom + 1][col + check[1]]
+					return ( beneath === '' || beneath === undefined ) ? true : false
+				} , true)
 			}
 			default: return true;
 		}
