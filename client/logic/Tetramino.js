@@ -52,24 +52,32 @@ class Tetramino {
 
 		switch(direction){
 			case 'left': {
-				if(col <= 0) return false
 				return matrix.reduce((mayMove, currentRow, index) => {
-					if(mayMove === false) return false;
 					let colIndex = locator('left', currentRow, 0, type)
-					if(colIndex === -1) return true;
-					let leftOf = board[index + row][col + colIndex  - 1]
-					return (leftOf === '' || leftOf === undefined) ? true : false
+					switch(true){
+						case mayMove === false: return false;
+						case colIndex === -1: return true;
+						case colIndex + col === 0: return false;
+						default: {
+							let leftOf = board[index + row][col + colIndex  - 1]
+							return (leftOf === '' || leftOf === undefined) ? true : false
+						}
+					}
 				}, true)
 			}
 			case 'right': {
-				let rightside = col + matrix[0].length
-				if(rightside >= board[0].length) return false
 				return matrix.reduce((mayMove, currentRow, index) => {
-					if(mayMove === false) return false;
 					let colIndex = locator('right', currentRow, matrix[index].length - 1, type)
-					if(colIndex === -1) return true;
-					let rightOf = board[index + row][rightside - Math.abs(currentRow.length - 1 - colIndex)]
-					return (rightOf === '' || rightOf === undefined) ? true : false
+					let rightside = col + matrix[0].length - Math.abs(currentRow.length - 1 - colIndex)
+					switch(true){
+						case mayMove === false: return false;
+						case colIndex === -1: return true;
+						case rightside >= board[0].length: return false;
+						default: {
+							let rightOf = board[index + row][rightside]
+							return (rightOf === '' || rightOf === undefined) ? true : false
+						}
+					}
 				}, true)
 			}
 			case 'down': {
