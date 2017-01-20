@@ -49,6 +49,7 @@ export default function game(state = {}, action){
 
 		}
 		case 'MOVE': {
+			console.log(action.keystroke)
 			const loc = Tetramino.move(action.keystroke, state.currentPiece)
 			const tetramino = new Tetramino(state.currentPiece.type, loc)
 			tetramino.matrix = state.currentPiece.matrix
@@ -58,6 +59,16 @@ export default function game(state = {}, action){
 					...state,
 					'newPiece': false,
 					'currentPiece':tetramino
+				}
+			} else if (action.keystroke === 'down'){
+				return {
+					...state,
+					'newPiece': true,
+					'currentPiece': new Tetramino(_.first(state.queue)),
+					'queue': [
+						..._.rest(state.queue),
+						_.sample(GAME_CONSTANTS.pieces)
+					]
 				}
 			}
 			return state;
