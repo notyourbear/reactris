@@ -48,6 +48,14 @@ export default function game(state = {}, action){
 			}
 			return state;
 		}
+		case 'CHECK_FOR_FULL_ROWS': {
+			let newBoard = Game.removeFullRows(state.gameboard);
+			if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard);
+			return {
+				...state,
+				'gameboard': newBoard
+			}
+		}
 		default: return state;
 	}
 }

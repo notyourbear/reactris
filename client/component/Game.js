@@ -35,6 +35,7 @@ class Game extends Component {
 				}
 			}
 			this.props.paintOnBoard(this.props.game.currentPiece);
+			this.props.checkForFullRows(this.props.game.board);
 		}
 	}
 

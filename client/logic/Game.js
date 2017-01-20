@@ -34,6 +34,26 @@ class Game {
 			}
 		});
 	}
+
+	static removeFullRows(board){
+		return board.filter(row => {
+			return row.some(block => block === '' || block === undefined);
+		});
+	}
+
+	static addRows(board){
+		const row = [];
+		let additionalRows = GAME_CONSTANTS.height - board.length;
+		let newBoard = [...board];
+
+		for(let i = GAME_CONSTANTS.width; i > 0; i--) {
+			row.push('');
+		}
+		for(; additionalRows > 0; additionalRows--){
+			newBoard = [row, ...newBoard]
+		}
+		return newBoard;
+	}
 }
 
 export default Game;

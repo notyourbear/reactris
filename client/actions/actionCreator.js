@@ -27,6 +27,13 @@ export function paintOnBoard(piece, cleanup){
 	}
 }
 
+export function checkForFullRows(board){
+	return {
+		board,
+		type: 'CHECK_FOR_FULL_ROWS'
+	}
+}
+
 export function updateQueue(queue){
 	return {
 		queue,
