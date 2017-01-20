@@ -14,6 +14,7 @@ class Game extends Component {
 	}
 
 	handleKeystroke(props, event){
+		console.log(event.keyCode)
 		event.preventDefault();
 		const acceptedKeystroke = _.values(KEYSTROKES).indexOf(event.keyCode)
 		if(acceptedKeystroke !== -1) {
@@ -21,9 +22,13 @@ class Game extends Component {
 		}
 	}
 
+	startGame(props){
+		  props.startGame();
+	}
+
 	setCurrentPiece(props){
-		props.setCurrentPiece(_.first(props.queue));
-		props.updateQueue(_.rest(props.queue));
+		props.setCurrentPiece(_.first(props.game.queue));
+		props.updateQueue(_.rest(props.game.queue));
 	}
 
 	componentDidUpdate(prevProps, prevState){
@@ -35,8 +40,14 @@ class Game extends Component {
 				}
 			}
 			this.props.paintOnBoard(this.props.game.currentPiece);
+			// needs to fire off elswhere //
 			this.props.checkForFullRows(this.props.game.board);
 		}
+	}
+
+	componentWillUnmount(){
+		console.log('un', this)
+		// clearInterval(this.interval)
 	}
 
 	render(){
@@ -45,10 +56,11 @@ class Game extends Component {
 			<div onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
 				<div className='queue'>
 					<div>
-						<Queue pieces={this.props.queue} />
+						<Queue pieces={this.props.game.queue} />
 					</div>
 				</div>
 				<div className='gameboard'>
+					<button onClick={this.startGame.bind(null,this.props)}> Start </button>
 					<button onClick={this.setCurrentPiece.bind(null, this.props)}> next piece </button>
 					<Board game={ game } />
 				</div>

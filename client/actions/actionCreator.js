@@ -1,5 +1,11 @@
 import KEYSTROKES from '../constants/keys.js'
 
+export function startGame(){
+	return {
+		type: 'START_GAME'
+	}
+}
+
 export function makeQueue(){
 	return {
 		type: 'MAKE_QUEUE'
@@ -30,7 +36,7 @@ export function paintOnBoard(piece, cleanup){
 export function checkForFullRows(board){
 	return {
 		board,
-		type: 'CHECK_FOR_FULL_ROWS'
+		type: 'CHECK_FOR_FULL_W'
 	}
 }
 

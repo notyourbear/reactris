@@ -1,4 +1,7 @@
+import _ from 'underscore'
+
 import Game from '../logic/Game.js'
+import Queue from '../logic/Queue.js';
 import Tetramino from '../logic/Tetramino.js'
 
 import GAME_CONSTANTS from '../constants/game.js'
@@ -6,6 +9,10 @@ import KEYSTROKES from '../constants/keys.js'
 
 export default function game(state = {}, action){
 	switch (action.type) {
+		case 'START_GAME': {
+			console.log('s', state);
+			return state;
+		}
 		case 'SET_CURRENT_PIECE': {
 			return {
 				...state,
@@ -49,13 +56,31 @@ export default function game(state = {}, action){
 			return state;
 		}
 		case 'CHECK_FOR_FULL_ROWS': {
-			let newBoard = Game.removeFullRows(state.gameboard);
-			if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard);
+			let newBoard = Game.removeFullRows(state.gameboard)
+			if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
 			return {
 				...state,
 				'gameboard': newBoard
 			}
 		}
+		case 'MAKE_QUEUE':
+			return {
+				...state,
+				'queue': Queue.make(GAME_CONSTANTS.pieces, GAME_CONSTANTS.queueSize)
+			}
+		case 'ADD_TO_QUEUE':
+			return {
+				...state,
+				'queue': Queue.addTo(state, _.sample(GAME_CONSTANTS.pieces))
+			}
+		case 'UPDATE_QUEUE':
+			return {
+				...state,
+				"queue": [
+					...action.queue,
+					_.sample(GAME_CONSTANTS.pieces)
+				]
+			}
 		default: return state;
 	}
 }
