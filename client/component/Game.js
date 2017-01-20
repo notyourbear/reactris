@@ -14,7 +14,6 @@ class Game extends Component {
 	}
 
 	handleKeystroke(props, event){
-		console.log(event.keyCode)
 		event.preventDefault();
 		const acceptedKeystroke = _.values(KEYSTROKES).indexOf(event.keyCode)
 		if(acceptedKeystroke !== -1) {
@@ -23,7 +22,10 @@ class Game extends Component {
 	}
 
 	startGame(props){
-		  props.startGame();
+		props.startGame();
+		const intervalId = setInterval(() => {
+            props.handleKeystroke(40)
+        }, 1000);
 	}
 
 	setCurrentPiece(props){

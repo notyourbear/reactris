@@ -10,8 +10,15 @@ import KEYSTROKES from '../constants/keys.js'
 export default function game(state = {}, action){
 	switch (action.type) {
 		case 'START_GAME': {
-			console.log('s', state);
-			return state;
+			return {
+				...state,
+				'newPiece': true,
+				'currentPiece': new Tetramino(_.first(state.queue)),
+				'queue': [
+					..._.rest(state.queue),
+					_.sample(GAME_CONSTANTS.pieces)
+				]
+			};
 		}
 		case 'SET_CURRENT_PIECE': {
 			return {
