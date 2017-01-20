@@ -24,9 +24,7 @@ export default function game(state = {}, action){
 			const matrix = Tetramino.rotate(state.currentPiece);
 			const tetramino = new Tetramino(state.currentPiece.type, state.currentPiece.location)
 			tetramino.matrix = matrix
-			let can = Tetramino.mayRotate(state.gameboard, state.currentPiece)
-			console.log(can)
-			if(can){
+			if(Tetramino.mayRotate(state.gameboard, state.currentPiece)){
 				return {
 					...state,
 					'newPiece': false,
