@@ -28,11 +28,6 @@ class Game extends Component {
         }, 1000);
 	}
 
-	setCurrentPiece(props){
-		props.setCurrentPiece(_.first(props.game.queue));
-		props.updateQueue(_.rest(props.game.queue));
-	}
-
 	componentDidUpdate(prevProps, prevState){
 		if (!_.isEqual(this.props.game, prevProps.game)){
 			if(!_.isEmpty(prevProps.game.currentPiece)){
@@ -42,14 +37,7 @@ class Game extends Component {
 				}
 			}
 			this.props.paintOnBoard(this.props.game.currentPiece);
-			// needs to fire off elswhere //
-			this.props.checkForFullRows(this.props.game.board);
 		}
-	}
-
-	componentWillUnmount(){
-		console.log('un', this)
-		// clearInterval(this.interval)
 	}
 
 	render(){
@@ -63,7 +51,6 @@ class Game extends Component {
 				</div>
 				<div className='gameboard'>
 					<button onClick={this.startGame.bind(null,this.props)}> Start </button>
-					<button onClick={this.setCurrentPiece.bind(null, this.props)}> next piece </button>
 					<Board game={ game } />
 				</div>
 			</div>

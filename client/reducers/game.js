@@ -49,7 +49,6 @@ export default function game(state = {}, action){
 
 		}
 		case 'MOVE': {
-			console.log(action.keystroke)
 			const loc = Tetramino.move(action.keystroke, state.currentPiece)
 			const tetramino = new Tetramino(state.currentPiece.type, loc)
 			tetramino.matrix = state.currentPiece.matrix
@@ -61,8 +60,11 @@ export default function game(state = {}, action){
 					'currentPiece':tetramino
 				}
 			} else if (action.keystroke === 'down'){
+				let newBoard = Game.removeFullRows(state.gameboard)
+				if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
 				return {
 					...state,
+					'gameboard': newBoard,
 					'newPiece': true,
 					'currentPiece': new Tetramino(_.first(state.queue)),
 					'queue': [
@@ -73,32 +75,7 @@ export default function game(state = {}, action){
 			}
 			return state;
 		}
-		case 'CHECK_FOR_FULL_ROWS': {
-			let newBoard = Game.removeFullRows(state.gameboard)
-			if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
-			return {
-				...state,
-				'gameboard': newBoard
-			}
-		}
-		case 'MAKE_QUEUE':
-			return {
-				...state,
-				'queue': Queue.make(GAME_CONSTANTS.pieces, GAME_CONSTANTS.queueSize)
-			}
-		case 'ADD_TO_QUEUE':
-			return {
-				...state,
-				'queue': Queue.addTo(state, _.sample(GAME_CONSTANTS.pieces))
-			}
-		case 'UPDATE_QUEUE':
-			return {
-				...state,
-				"queue": [
-					...action.queue,
-					_.sample(GAME_CONSTANTS.pieces)
-				]
-			}
+
 		default: return state;
 	}
 }
