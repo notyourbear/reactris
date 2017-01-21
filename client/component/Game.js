@@ -27,19 +27,7 @@ class Game extends Component {
             props.handleKeystroke(40)
         }, 1000);
 	}
-
-	componentDidUpdate(prevProps, prevState){
-		if (!_.isEqual(this.props.game, prevProps.game)){
-			if(!_.isEmpty(prevProps.game.currentPiece)){
-				this.props.paintOnBoard(prevProps.game.currentPiece, true);
-				if(this.props.game.newPiece){
-					this.props.paintOnBoard(prevProps.game.currentPiece);
-				}
-			}
-			this.props.paintOnBoard(this.props.game.currentPiece);
-		}
-	}
-
+	
 	render(){
 		const { game, queue } = this.props;
 		return (

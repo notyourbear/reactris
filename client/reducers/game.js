@@ -39,10 +39,13 @@ export default function game(state = {}, action){
 			const tetramino = new Tetramino(state.currentPiece.type, state.currentPiece.location)
 			tetramino.matrix = matrix
 			if(Tetramino.mayRotate(state.gameboard, state.currentPiece)){
+				let map = Game.paintOnBoard(state.gameboard, state.currentPiece, true)
+				map = Game.paintOnBoard(map, tetramino)
 				return {
 					...state,
 					'newPiece': false,
-					'currentPiece': tetramino
+					'currentPiece': tetramino,
+					'gameboard': map
 				}
 			}
 			return state;
@@ -54,10 +57,13 @@ export default function game(state = {}, action){
 			tetramino.matrix = state.currentPiece.matrix
 
 			if(Tetramino.mayMove(action.keystroke, state.gameboard, state.currentPiece)){
+				let map = Game.paintOnBoard(state.gameboard, state.currentPiece, true)
+				map = Game.paintOnBoard(map, tetramino)
 				return {
 					...state,
 					'newPiece': false,
-					'currentPiece':tetramino
+					'currentPiece':tetramino,
+					'gameboard': map
 				}
 			} else if (action.keystroke === 'down'){
 				let newBoard = Game.removeFullRows(state.gameboard)
