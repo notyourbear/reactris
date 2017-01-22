@@ -10,29 +10,18 @@ import KEYSTROKES from '../constants/keys.js'
 export default function game(state = {}, action){
 	switch (action.type) {
 		case 'START_GAME': {
+			const currentPiece = new Tetramino(_.first(state.queue))
+			const gameboard = Game.paintOnBoard(state.gameboard, currentPiece)
 			return {
 				...state,
+				currentPiece,
+				gameboard,
 				'newPiece': true,
-				'currentPiece': new Tetramino(_.first(state.queue)),
 				'queue': [
 					..._.rest(state.queue),
 					_.sample(GAME_CONSTANTS.pieces)
 				]
 			};
-		}
-		case 'SET_CURRENT_PIECE': {
-			return {
-				...state,
-				'newPiece': true,
-				'currentPiece': new Tetramino(action.pieceType)
-			}
-		}
-		case 'PAINT_ON_BOARD': {
-			const gameboard = Game.paintOnBoard(state.gameboard, action.piece, action.cleanup)
-			return {
-				...state,
-				gameboard
-			}
 		}
 		case 'ROTATE': {
 			const matrix = Tetramino.rotate(state.currentPiece);
@@ -68,11 +57,13 @@ export default function game(state = {}, action){
 			} else if (action.keystroke === 'down'){
 				let newBoard = Game.removeFullRows(state.gameboard)
 				if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
+				const currentPiece = new Tetramino(_.first(state.queue))
+				const gameboard = Game.paintOnBoard(newBoard, currentPiece)
 				return {
 					...state,
-					'gameboard': newBoard,
+					gameboard,
+					currentPiece,
 					'newPiece': true,
-					'currentPiece': new Tetramino(_.first(state.queue)),
 					'queue': [
 						..._.rest(state.queue),
 						_.sample(GAME_CONSTANTS.pieces)

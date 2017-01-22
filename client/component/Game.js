@@ -27,7 +27,7 @@ class Game extends Component {
             props.handleKeystroke(40)
         }, 1000);
 	}
-	
+
 	render(){
 		const { game, queue } = this.props;
 		return (
