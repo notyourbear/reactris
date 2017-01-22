@@ -54,6 +54,10 @@ export default function game(state = {}, action){
 					'currentPiece':tetramino,
 					'gameboard': map
 				}
+			} else if (action.keystroke === 'down' && state.newPiece === true) {
+				/* game over */
+				console.log('game over')
+				return state;
 			} else if (action.keystroke === 'down'){
 				let newBoard = Game.removeFullRows(state.gameboard)
 				if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
