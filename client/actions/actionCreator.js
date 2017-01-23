@@ -1,16 +1,9 @@
 import KEYSTROKES from '../constants/keys.js'
 
-export function startGame(){
+export function startGame(intervalId){
 	return {
+		intervalId,
 		type: 'START_GAME'
-	}
-}
-
-export function paintOnBoard(piece, cleanup){
-	return {
-		piece,
-		cleanup,
-		type: 'PAINT_ON_BOARD'
 	}
 }
 

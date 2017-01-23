@@ -16,16 +16,22 @@ class Game extends Component {
 	handleKeystroke(props, event){
 		event.preventDefault();
 		const acceptedKeystroke = _.values(KEYSTROKES).indexOf(event.keyCode)
-		if(acceptedKeystroke !== -1) {
+		if(acceptedKeystroke !== -1 && props.game.gameover !== true) {
 			props.handleKeystroke(event.keyCode);
 		}
 	}
 
 	startGame(props){
-		props.startGame();
 		const intervalId = setInterval(() => {
             props.handleKeystroke(40)
         }, 1000);
+		props.startGame(intervalId);
+	}
+
+	componentDidUpdate(){
+		if(this.props.game.gameover === true){
+			clearInterval(this.props.game.intervalId)
+		}
 	}
 
 	render(){

@@ -16,6 +16,7 @@ export default function game(state = {}, action){
 				...state,
 				currentPiece,
 				gameboard,
+				'intervalId': action.intervalId,
 				'newPiece': true,
 				'queue': [
 					..._.rest(state.queue),
@@ -56,8 +57,10 @@ export default function game(state = {}, action){
 				}
 			} else if (action.keystroke === 'down' && state.newPiece === true) {
 				/* game over */
-				console.log('game over')
-				return state;
+				return {
+					...state,
+					'gameover': true
+				}
 			} else if (action.keystroke === 'down'){
 				let newBoard = Game.removeFullRows(state.gameboard)
 				if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
