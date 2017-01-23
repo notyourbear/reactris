@@ -1,21 +1,24 @@
-.queue ul {
-	padding: 0;
-	margin: 0;
-}
-
-.queue li {
-	padding: 10px 30px;
-	margin: 0;
-	list-style-type: none;
-}
-
 .queue {
-	background: #ddd;
-	width: 80px;
+	background: #A18C27;
 	border: 2px solid black;
+	ul {
+		padding: 0;
+		margin: 0 0 0 40%;
+	}
+
+	li {
+		padding: 15px 0;
+		margin: 0;
+		list-style-type: none;
+	}
 }
 
 .nextUp {
-	border-bottom: 2px solid black;
-	padding: 20px 30px;
+	padding: 24px 0;
+	margin: 0 0 0 40%;
+}
+
+hr {
+	margin: 0;
+	border-top: 1px solid black;
 }

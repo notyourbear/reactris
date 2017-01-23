@@ -37,15 +37,18 @@ class Game extends Component {
 	render(){
 		const { game, queue } = this.props;
 		return (
-			<div onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
-				<div className='queue'>
-					<div>
-						<Queue pieces={this.props.game.queue} />
+			<div className='container' onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
+				<div className='row'>
+					<div className='queue two columns'>
+						<div>
+							<Queue pieces={this.props.game.queue} />
+						</div>
 					</div>
-				</div>
-				<div className='gameboard'>
-					<button onClick={this.startGame.bind(null,this.props)}> Start </button>
-					<Board game={ game } />
+					<div className='gameboard one columns'></div>
+					<div className='gameboard nine columns'>
+						<button onClick={this.startGame.bind(null,this.props)}> Start </button>
+						<Board game={ game } />
+					</div>
 				</div>
 			</div>
 		);

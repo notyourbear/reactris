@@ -23,6 +23,7 @@ const Queue = (props) => {
 	return (
 		<div className='queue'>
 			<div className='nextUp'> {QueueItem(first)} </div>
+			<hr/>
 			<ul>
 				{ rest.map((piece, i) => <li key={i}> { QueueItem(piece) } </li>) }
 			</ul>
