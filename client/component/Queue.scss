@@ -1,24 +1,22 @@
 .queue {
-	background: #A18C27;
-	border: 2px solid black;
+	.title {
+		text-align: center;
+	}
 	ul {
 		padding: 0;
 		margin: 0 0 0 40%;
 	}
-
 	li {
 		padding: 15px 0;
 		margin: 0;
 		list-style-type: none;
 	}
-}
-
-.nextUp {
-	padding: 24px 0;
-	margin: 0 0 0 40%;
-}
-
-hr {
-	margin: 0;
-	border-top: 1px solid black;
+	hr {
+		margin: 0;
+		border-top: 1px solid black;
+	}
+	.nextUp {
+		padding: 24px 0;
+		margin: 0 0 0 40%;
+	}
 }

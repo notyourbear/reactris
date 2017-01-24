@@ -22,6 +22,8 @@ const Queue = (props) => {
 
 	return (
 		<div className='queue'>
+			<div className='title'> <h5> Up next </h5> </div>
+			<hr/>
 			<div className='nextUp'> {QueueItem(first)} </div>
 			<hr/>
 			<ul>
