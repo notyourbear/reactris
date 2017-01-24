@@ -21,12 +21,12 @@ h5 {
 	display: inline-block;
 	font-size: 13px;
 	border: 1px solid #333;
-	&:active {
+	&:hover {
 		background: #888;
 		color: white;
 	}
-	&:hover {
-		color: #888;
+	&:active {
+		background: #333;
 	}
 }
 
