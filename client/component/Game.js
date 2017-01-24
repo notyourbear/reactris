@@ -39,7 +39,7 @@ class Game extends Component {
 		return (
 			<div className='container game' onKeyDown={this.handleKeystroke.bind('onKeyDown', this.props)}>
 				<div className='row'>
-					<div className='two columns'>&nbsp;</div>
+					<div className='one columns'>&nbsp;</div>
 					<div className='queue two columns'>
 						<div>
 							<Queue pieces={this.props.game.queue} />
