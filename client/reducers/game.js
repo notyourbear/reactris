@@ -13,12 +13,11 @@ export default function game(state = {}, action){
 			const currentPiece = new Tetramino(_.first(state.queue))
 			let gameboard = Game.make()
 			gameboard = Game.paintOnBoard(gameboard, currentPiece)
-			const score = 0;
 			return {
 				...state,
-				score,
 				currentPiece,
 				gameboard,
+				'score': 0,
 				'active': true,
 				'intervalId': action.intervalId,
 				'newPiece': true,
