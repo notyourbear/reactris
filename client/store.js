@@ -17,6 +17,7 @@ const defaultState = {
 		gameboard: Game.make(GAME_CONSTANTS.height,GAME_CONSTANTS.width),
 		currentPiece: {},
 		queue: Queue.make(pieces, size),
+		score: 0
 	}
 }
 

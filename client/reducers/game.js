@@ -11,11 +11,15 @@ export default function game(state = {}, action){
 	switch (action.type) {
 		case 'START_GAME': {
 			const currentPiece = new Tetramino(_.first(state.queue))
-			const gameboard = Game.paintOnBoard(state.gameboard, currentPiece)
+			let gameboard = Game.make()
+			gameboard = Game.paintOnBoard(gameboard, currentPiece)
+			const score = 0;
 			return {
 				...state,
+				score,
 				currentPiece,
 				gameboard,
+				'active': true,
 				'intervalId': action.intervalId,
 				'newPiece': true,
 				'queue': [
@@ -59,17 +63,24 @@ export default function game(state = {}, action){
 				/* game over */
 				return {
 					...state,
+					'active': false,
 					'gameover': true
 				}
 			} else if (action.keystroke === 'down'){
 				let newBoard = Game.removeFullRows(state.gameboard)
-				if(newBoard.length < GAME_CONSTANTS.height) newBoard = Game.addRows(newBoard)
+				let score = state.score
+				const diff = GAME_CONSTANTS.height - newBoard.length
+				if(diff > 0) {
+					score += diff
+					newBoard = Game.addRows(newBoard)
+				}
 				const currentPiece = new Tetramino(_.first(state.queue))
 				const gameboard = Game.paintOnBoard(newBoard, currentPiece)
 				return {
 					...state,
 					gameboard,
 					currentPiece,
+					score,
 					'newPiece': true,
 					'queue': [
 						..._.rest(state.queue),

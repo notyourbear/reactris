@@ -4,13 +4,25 @@ h5 {
 	color: #333;
 }
 
-.rules {
+p {
+	color: #333;
+	margin: 1.25rem .5rem;
 	font-size: 2.15rem;
-	line-height: 1.15;
+}
+
+.score {
+	margin-top: 50px;
 	p {
-		color: #333;
-		margin: 1.25rem .5rem;
+		text-align:center;
 	}
+}
+
+.rules {
+	line-height: 1.15;
+}
+
+.hidden {
+	display: none !important;
 }
 
 .start {

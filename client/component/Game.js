@@ -25,7 +25,13 @@ class Game extends Component {
 		const intervalId = setInterval(() => {
             props.handleKeystroke(40)
         }, 1000);
-		props.startGame(intervalId);
+		if(props.game.active){
+			clearInterval(props.game.intervalId)
+			props.startGame(intervalId);
+		} else {
+			props.startGame(intervalId);
+		}
+
 	}
 
 	componentDidUpdate(){
@@ -43,6 +49,11 @@ class Game extends Component {
 					<div className='queue two columns'>
 						<div>
 							<Queue pieces={this.props.game.queue} />
+							<div className='score'>
+								<h5>Score</h5>
+								<hr/>
+								<p>{game.score}</p>
+							</div>
 						</div>
 					</div>
 					<div className='gameboard five columns'>
