@@ -48,8 +48,15 @@ class Game extends Component {
 					<div className='gameboard five columns'>
 						<Board game={ game } />
 					</div>
-					<div className='two columns'>
-						<button onClick={this.startGame.bind(null,this.props)}> Start </button>
+					<div className='three columns'>
+						<div className='rules'>
+							<h5>How to play:</h5>
+							<hr/>
+							<p> Arrow keys to move. </p>
+							<p> Space bar to rotate. </p>
+						</div>
+						<hr/>
+						<button className='start' onClick={this.startGame.bind(null,this.props)}> Start </button>
 					</div>
 				</div>
 			</div>
