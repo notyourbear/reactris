@@ -1,7 +1,7 @@
 var path = require('path');
 var express = require('express');
 
-const PORT = process.env.port || 3000
+var PORT = process.env.PORT || 3000
 var app = express();
 
 if(process.env.NODE_ENV !== 'production') {
